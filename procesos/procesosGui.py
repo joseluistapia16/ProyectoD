@@ -18,3 +18,11 @@ class String:
         for i in range(1,len(valor)):
             msg = msg + valor[i]
         return msg
+
+    def getPosCombo(self,valor,lista1):
+        pos = -1
+        for i in range(len(lista1)):
+            if valor==lista1[i]:
+                pos = i
+                break
+        return pos

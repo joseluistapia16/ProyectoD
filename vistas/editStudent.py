@@ -4,7 +4,7 @@ from tkinter import messagebox
 from procesos.procesosGui import *
 from dominio.entidades import *
 from procesos.archivos import *
-class NewStudent:
+class EditStudent:
 
     def __init__(self,obj=None):
         titulo = ""
@@ -16,11 +16,15 @@ class NewStudent:
         self.ruta = 'C:/Users/sopor/PycharmProjects/ProyectoD/estudiantesD.csv'
         self.arch = Archivo()
         self.cv = ProcesosGui()
+        self.cad = String()
         self.__getWindow(titulo)
         self.__getFrame()
         self.__getLabels()
         self.__getInputs()
         self.__getButtons()
+        if obj!=None:
+            self.__DataCharge(obj)
+            self.cedula['state']='disabled'
         #self.ven.mainloop()
 
     def __getWindow(self,titulo=None):
@@ -56,8 +60,6 @@ class NewStudent:
                     bg=self.fondo,font=("Arial",18)).place(x=posX,
                                                           y=350)
 
-
-
     def __getInputs(self):
         posX=350
         self.cedula = Entry(self.marco,font=("Tahoma",16))
@@ -73,8 +75,6 @@ class NewStudent:
         self.combo = Combobox(self.marco,state='readonly',values=self.lista)
         self.combo.place(x=posX, y=350,height=30,width=180)
 
-
-
     def __getFrame(self):
         self.marco = Frame(self.ven,bd=5,bg=self.fondo)
         self.marco.pack(fill="both",expand=1)
@@ -83,28 +83,34 @@ class NewStudent:
         self.marco.config(relief="groove")
 
     def __getButtons(self):
-        btn1 = Button(self.marco,relief="flat",text="Buscar",bg="green",
-                      command=self.accion1,
-                      font=("Tahoma",16),fg="white",cursor="hand1")\
-            .place(x=550,y=95,width=90,height=30)
-        btn2 = Button(self.ven,relief="flat",text="Guardar",bg="green",
-                      command=self.getData,
-                      font=("Tahoma",16),fg="white",cursor="hand1")\
-            .place(x=200,y=425,width=110,height=40)
+        self.grabar = Button(self.ven,relief="flat",text="Actualizar",bg="green",
+                      command=self.edit,
+                      font=("Tahoma",16),fg="white",cursor="hand1")
+        self.grabar.place(x=120,y=425,width=110,height=40)
+        self.eliminar = Button(self.marco,relief="flat",text="Eliminar",bg="green",
+                      command=self.delete,
+                      font=("Tahoma",16),fg="white",cursor="hand1")
+        self.eliminar.place(x=300,y=420,width=110,height=40)
+
         btn3 = Button(self.marco,relief="flat",text="Cancelar",bg="green",
                       command=self.ven.destroy,
                       font=("Tahoma",16),fg="white",cursor="hand1")\
-            .place(x=360,y=420,width=110 ,height=40)
+            .place(x=460,y=420,width=110 ,height=40)
 
 
-    def vaciar(self):
-        self.cedula.delete(0,END)
-        self.nombres.delete(0,END)
-        self.apellidos.delete(0,END)
-        self.correo.delete(0,END)
-        self.carrera.delete(0,END)
+    def __DataCharge(self,obj):
+        self.lista1=[" ","MATUTINA","VESPERTINA","NOCTURNA"]
+        self.cedula.insert(0,obj.cedula)
+        self.nombres.insert(0,obj.nombres)
+        self.apellidos.insert(0,obj.apellidos)
+        self.correo.insert(0,obj.correo)
+        self.carrera.insert(0,obj.carrera)
+        pos = self.cad.getPosCombo(obj.jornada,self.lista1)
+        self.combo.set(self.lista1[pos])
 
-    def getData(self):
+    def edit(self):
+        self.datos = self.arch.allStudents(self.ruta)
+        posi = self.arch.getStudentPosition(self.cedula.get(),self.ruta)
         pos = self.combo.current()
         obj = Estudiante(self.cedula.get(),
                       self.nombres.get(),
@@ -112,25 +118,27 @@ class NewStudent:
                       self.correo.get(),
                       self.carrera.get(),
                       self.lista[pos])
+        self.datos[posi].cedula=obj.cedula
+        self.datos[posi].nombres=obj.nombres
+        self.datos[posi].apellidos=obj.apellidos
+        self.datos[posi].correo=obj.correo
+        self.datos[posi].carrera= obj.carrera
+        self.datos[posi].jornada=obj.jornada
+        msg = ""
+        for i in range(len(self.datos)):
+            msg=msg+self.datos[i].cedula+","+self.datos[i].nombres+","+self.datos[i].apellidos+","+\
+                ","+self.datos[i].correo+","+self.datos[i].jornada+",\n"
+        print(msg)
+        """ 
         reg = obj. cedula+","+obj.nombres+","+obj.apellidos\
               +","+obj.correo+","+obj.carrera+","+ obj.jornada+",\n"
         print(reg)
         self.arch.create(self.ruta,reg,"a")
-        self.vaciar()
-        messagebox.showinfo("Registro",
-        "Su registro ha sido grabado con exito!",
+        """
+        messagebox.showinfo("Actualizacion",
+        "Su registro ha sido actualizado con exito!",
                             parent=self.ven)
 
-
-
-    def accion1(self):
-        print("ruta",self.ruta)
-        obj = self.arch.getStudent(self.cedula.get(),self.ruta)
-        if obj!=None:
-           messagebox.showinfo("Mensaje!", "Cedula ya existe!.", parent=self.ven)
-
-
-
-
-
-
+    def delete(self):
+       pass
+       #messagebox.showinfo("Mensaje!", "Cedula ya existe!.", parent=self.ven)

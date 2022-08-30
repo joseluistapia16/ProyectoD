@@ -60,3 +60,13 @@ class Archivo:
                 res.append(lista[i])
         return res
 
+    def getStudentPosition(self,id, ruta):
+        lista= self.allStudents(ruta)
+        pos=-1
+        for i in range(len(lista)):
+            if id == lista[i].cedula:
+                pos= i
+                break
+        return pos
+
+

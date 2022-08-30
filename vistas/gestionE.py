@@ -6,6 +6,7 @@ from procesos.procesosGui import *
 from procesos.archivos import *
 from vistas.menuPrincipal import *
 from vistas.newStudent import *
+from vistas.editStudent import *
 class GestionEstudiantes:
 
     def __init__(self,obj=None):
@@ -109,7 +110,7 @@ class GestionEstudiantes:
                 self.n_fila[1]=posi
                 self.clk=0
             if self.clk==0 and self.n_fila[0]==self.n_fila[1]:
-                print("Formulario cargado")
+                fre = EditStudent(self.datos[posi-1])
         else:
             self.clk=0
 
@@ -124,7 +125,7 @@ class GestionEstudiantes:
             self.__showTable(self.datos)
 
     def accion2(self):
-        reg = Registro(self.obU)
+        reg = NewStudent(self.obU)
 
     def validateId(self,accion,car,texto):
         if accion!='1':
@@ -132,7 +133,7 @@ class GestionEstudiantes:
         return car in "1234567890" and len(texto)<10
 
 
-#gest = GestionEstudiantes()
+gest = GestionEstudiantes()
 
 
 
