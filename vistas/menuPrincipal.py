@@ -6,7 +6,7 @@ from vistas.gestionE import *
 class MenuApp:
 
     def __init__(self,obU=None):
-        self.imagen = 'C:/Users/sopor/PycharmProjects/ProyectoD/img/python-poo.png'
+        self.imagen = 'C:/Users/josel/OneDrive/Escritorio/PROYECTOS_PYTHON/ProyectoD/img/python-poo.png'
         self.cv = ProcesosGui()
         titulo=''
         if obU!=None:

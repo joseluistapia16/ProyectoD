@@ -7,7 +7,7 @@ from vistas.menuPrincipal import *
 class LoginD:
 
     def __init__(self,titulo=None):
-        self.ruta = 'C:/Users/sopor/PycharmProjects/ProyectoD/usuariosD.csv'
+        self.ruta = 'C:/Users/josel/OneDrive/Escritorio/PROYECTOS_PYTHON/ProyectoD/usuariosD.csv'
         self.cv = ProcesosGui()
         self.arch = Archivo()
         self.__getWindow()

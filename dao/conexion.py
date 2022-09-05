@@ -18,5 +18,5 @@ class Conexion:
         return conect
 
 
-obC = Conexion()
-print(obC.conectar("segundod2022_1"))
+#obC = Conexion()
+#print(obC.conectar("segundod2022_1"))

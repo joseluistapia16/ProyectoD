@@ -13,7 +13,7 @@ class NewStudent:
             titulo="Usuario : "+obj.nombres + " "+obj.apellidos+"."
         self.lista=["MATUTINA","VESPERTINA","NOCTURNA"]
         self.fondo="#CCCCFF"
-        self.ruta = 'C:/Users/sopor/PycharmProjects/ProyectoD/estudiantesD.csv'
+        self.ruta = 'C:/Users/josel/OneDrive/Escritorio/PROYECTOS_PYTHON/ProyectoD/estudiantesD.csv'
         self.arch = Archivo()
         self.cv = ProcesosGui()
         self.__getWindow(titulo)

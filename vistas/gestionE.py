@@ -17,7 +17,7 @@ class GestionEstudiantes:
         if obj!=None:
             self.obU = obj
             titulo= "Usuario : "+obj.nombres+" "+obj.apellidos+"."
-        self.ruta = 'C:/Users/sopor/PycharmProjects/ProyectoD/estudiantesD.csv'
+        self.ruta = 'C:/Users/josel/OneDrive/Escritorio/PROYECTOS_PYTHON/ProyectoD/estudiantesD.csv'
         self.cv = ProcesosGui()
         self.arch = Archivo()
         self.datos= self.arch.allStudents(self.ruta)
@@ -133,7 +133,7 @@ class GestionEstudiantes:
         return car in "1234567890" and len(texto)<10
 
 
-gest = GestionEstudiantes()
+#gest = GestionEstudiantes()
 
 
 

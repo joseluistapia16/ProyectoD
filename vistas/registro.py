@@ -10,7 +10,8 @@ class Registro:
         self.lista=["MEDICO","PROGRAMADOR","CONTADOR","DOCENTE",
                     "OTRO.."]
         self.fondo="#CCCCFF"
-        self.ruta = 'C:/Users/sopor/PycharmProjects/ProyectoD/usuariosD.csv'
+        self.ruta = 'C:/Users/josel/OneDrive/Escritorio/PROYECTOS_PYTHON/ProyectoD/usuariosD.csv'
+        print(self.ruta)
         self.arch = Archivo()
         self.cv = ProcesosGui()
         self.__getWindow(titulo)
